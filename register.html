@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div id="register-container" class="form-container active">
+            <h1>Create Account</h1>
+            <form method="post" onsubmit="return validateForm()" name="rm">
+                <label for="f-name">First Name</label>
+                <input type="text" id="f-name" name="f-name" placeholder="Enter your first name">
+                <label for="s-name">Last Name</label>
+                <input type="text" id="s-name" name="s-name" placeholder="Enter your last name">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password">
+                <label for="c-password">Confirm Password</label>
+                <input type="password" id="c-password" name="c-password" placeholder="Confirm your password">
+                <button type="submit">Register</button>
+            </form>
+            <p class="toggle-text">Already have an account? <a href="#" onclick="toggleForms(); return false;">Login here</a></p>
+        </div>
+        
+        <div id="login-container" class="form-container">
+            <h1>Welcome Back</h1>
+            <form method="post" name="lm">
+                <label for="login-email">E-mail</label>
+                <input type="email" id="login-email" name="email" placeholder="Enter your email">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="password" placeholder="Enter your password">
+                <button type="submit">Login</button>
+            </form>
+            <p class="toggle-text">Don't have an account? <a href="#" onclick="toggleForms(); return false;">Register here</a></p>
+        </div>
+    </div>
+    <script>
+        function toggleForms() {
+            const registerContainer = document.getElementById('register-container');
+            const loginContainer = document.getElementById('login-container');
+            
+            registerContainer.classList.toggle('active');
+            loginContainer.classList.toggle('active');
+        }
+
+        function validateForm() {
+            var firstName = document.rm['f-name'].value;
+            var secondName = document.rm['s-name'].value;
+            var email = document.rm.email.value;
+            var password = document.rm.password.value;
+            var confirmPassword = document.rm['c-password'].value;
+            
+            if (firstName == null || firstName == "") {
+                alert("Please enter First Name");
+                return false;
+            }
+            if (secondName == null || secondName == "") {
+                alert("Please enter Last Name");
+                return false;
+            }
+            if (email == null || email == "") {
+                alert("Please enter E-mail");
+                return false;
+            }
+            if (password == null || password == "") {
+                alert("Please enter Password");
+                return false;
+            }
+            if (confirmPassword == null || confirmPassword == "") {
+                alert("Please confirm Password");
+                return false;
+            }
+            if (password !== confirmPassword) {
+                alert("Passwords do not match");
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>
