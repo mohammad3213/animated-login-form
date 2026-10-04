@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Private PixelPlay product and discount manager." />
+    <title>Shop admin | PixelPlay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="admin.css" />
+    <script src="admin.js" defer></script>
+  </head>
+  <body>
+    <header class="admin-header">
+      <a class="wordmark" href="shop.html"><span class="logo-mark">P</span>pixel<span>play</span></a>
+      <div class="admin-header-right"><span class="admin-indicator"><i></i> PRIVATE STORE ADMIN</span><a href="shop.html">View store ↗</a></div>
+    </header>
+
+    <main class="admin-main">
+      <section class="login-card" id="loginPanel">
+        <span class="panel-kicker">PIXELPLAY · MANAGEMENT</span>
+        <h1>Store admin</h1>
+        <p>Sign in with the private admin password configured on your server.</p>
+        <form id="loginForm">
+          <label for="adminPassword">Admin password</label>
+          <input id="adminPassword" name="password" type="password" autocomplete="current-password" minlength="12" required />
+          <button class="primary-button" type="submit">Sign in securely <span>→</span></button>
+        </form>
+        <p class="form-message" id="loginMessage" role="status"></p>
+        <p class="setup-note">First time? Add <code>ADMIN_PASSWORD</code> to your private <code>.env</code> file. See the README for setup.</p>
+      </section>
+
+      <section id="dashboard" hidden>
+        <div class="dashboard-heading">
+          <div><span class="panel-kicker">YOUR CATALOGUE</span><h1>Shop manager</h1><p>Products, photos, pricing and deals. Changes save to the shop automatically.</p></div>
+          <button class="logout-button" id="logoutButton" type="button">Sign out</button>
+        </div>
+
+        <div class="admin-stats">
+          <div><span>Products</span><strong id="productCount">0</strong></div>
+          <div><span>On sale</span><strong id="saleCount">0</strong></div>
+          <div><span>Storefront</span><a href="shop.html#discounts">View live deals ↗</a></div>
+        </div>
+
+        <div class="manager-layout">
+          <section class="editor-card">
+            <div class="editor-heading"><div><span class="panel-kicker" id="editorKicker">NEW LISTING</span><h2 id="editorTitle">Add a product</h2></div><button class="reset-button" id="resetForm" type="button">Clear</button></div>
+            <form id="productForm">
+              <input type="hidden" name="editingId" />
+              <div class="form-grid">
+                <label>Product name<input name="name" maxlength="100" required placeholder="Example: Aurora Wireless Headset" /></label>
+                <label>Product ID <small>lowercase-and-hyphens</small><input name="id" pattern="[a-z0-9]+(?:-[a-z0-9]+)*" maxlength="50" required placeholder="aurora-headset" /></label>
+                <label>Category<select name="category"><option value="game">Digital game</option><option value="gear">Physical gaming gear</option></select></label>
+                <label>Genre / product type<input name="type" maxlength="50" required placeholder="RPG, ACTION, HEADSET, MOUSE…" /></label>
+                <label>Price (USD)<input name="price" type="number" min="0.50" max="10000" step="0.01" required placeholder="49.99" /></label>
+                <label>Discount<input name="discountPercent" type="number" min="0" max="90" step="1" value="0" required /><small>0 removes the sale price</small></label>
+                <label class="full-width">Short description<textarea name="description" maxlength="300" rows="3" required placeholder="What makes this a great pick?"></textarea></label>
+                <label class="full-width">Product photo URL<input name="image" type="url" required placeholder="https://images.unsplash.com/photo-…" /><small>Use an HTTPS image from images.unsplash.com or images.pexels.com.</small></label>
+                <label class="full-width">Photo description (alt text)<input name="alt" maxlength="180" required placeholder="Describe the image for shoppers using screen readers" /></label>
+                <label class="full-width">Badge <small>optional · 24 characters max</small><input name="badge" maxlength="24" placeholder="BEST SELLER" /></label>
+              </div>
+              <div class="editor-actions"><button class="primary-button" type="submit" id="saveProduct">Add product <span>→</span></button><p id="productMessage" class="form-message" role="status"></p></div>
+            </form>
+          </section>
+
+          <section class="catalogue-card">
+            <div class="editor-heading"><div><span class="panel-kicker">LIVE STORE DATA</span><h2>Products & discounts</h2></div></div>
+            <p class="catalogue-note">Set a percentage off per product. Sale pricing updates on the store and is checked again before Stripe checkout.</p>
+            <label class="catalogue-search">
+              <span aria-hidden="true">⌕</span>
+              <input id="productSearch" type="search" placeholder="Search by name, ID, genre, or gear type" aria-label="Search admin products" />
+              <button id="clearProductSearch" type="button" aria-label="Clear product search" hidden>×</button>
+            </label>
+            <div class="admin-product-list" id="adminProductList"></div>
+            <p class="catalogue-empty" id="catalogueEmpty" hidden>No products match your search.</p>
+          </section>
+        </div>
+        <p class="admin-footnote">Store photos and products are saved in <code>products.json</code>. Keep your admin password private and don't expose the development server publicly.</p>
+      </section>
+    </main>
+    <div class="toast" id="adminToast" role="status" aria-live="polite"></div>
+  </body>
+</html>

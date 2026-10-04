@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Account | PixelPlay</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="auth-page">
+      <section class="auth-card">
+        <div class="brand-panel">
+          <div class="brand-content">
+            <span class="eyebrow">Welcome to PixelPlay</span>
+            <h1>Your next adventure starts here.</h1>
+            <p>
+              Create a private account to track orders, spending, and payment receipts. Card details stay with Stripe.
+            </p>
+            <ul class="feature-list">
+              <li>Discover your next favorite game</li>
+              <li>See your completed orders</li>
+              <li>Review your verified spending</li>
+              <li>Keep payment details with Stripe</li>
+            </ul>
+            <a class="shop-link" href="shop.html">Explore the game shop <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+
+        <div class="form-panel">
+          <div class="mode-toggle" aria-label="Authentication mode">
+            <button class="toggle-btn active" type="button" data-mode="login">Login</button>
+            <button class="toggle-btn" type="button" data-mode="register">Register</button>
+          </div>
+
+          <form id="loginForm" class="auth-form active" novalidate>
+            <div class="form-header">
+              <h2>Welcome back</h2>
+              <p>Sign in to continue</p>
+            </div>
+
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" placeholder="you@example.com" autocomplete="email" required />
+            </label>
+
+            <label>
+              <span>Password</span>
+              <input type="password" name="password" placeholder="Enter your password" autocomplete="current-password" required />
+            </label>
+
+            <div class="inline-row">
+              <label class="check-wrap">
+                <input type="checkbox" name="remember" />
+                <span>Remember me</span>
+              </label>
+              <span class="password-note">Use at least 12 characters</span>
+            </div>
+
+            <button class="primary-btn" type="submit">Login</button>
+            <p class="helper-text">New here? <button type="button" class="text-btn" data-mode="register">Create an account</button></p>
+          </form>
+
+          <form id="registerForm" class="auth-form" novalidate>
+            <div class="form-header">
+              <h2>Create account</h2>
+              <p>Start your journey today</p>
+            </div>
+
+            <label>
+              <span>Full name</span>
+              <input type="text" name="fullName" placeholder="John Doe" minlength="2" maxlength="80" autocomplete="name" required />
+            </label>
+
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" placeholder="you@example.com" required />
+            </label>
+
+            <label>
+              <span>Password</span>
+              <input type="password" name="password" placeholder="At least 12 characters" minlength="12" maxlength="128" autocomplete="new-password" required />
+            </label>
+
+            <label>
+              <span>Confirm password</span>
+              <input type="password" name="confirmPassword" placeholder="Re-enter password" minlength="12" maxlength="128" autocomplete="new-password" required />
+            </label>
+
+            <button class="primary-btn" type="submit">Register</button>
+            <p class="helper-text">Already have an account? <button type="button" class="text-btn" data-mode="login">Login</button></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="accountPanel" class="account-panel" hidden aria-labelledby="accountHeading">
+        <div class="account-heading">
+          <div>
+            <span class="eyebrow">PIXELPLAY ACCOUNT</span>
+            <h1 id="accountHeading">Your profile</h1>
+            <p>Order totals include completed payments verified by Stripe.</p>
+          </div>
+          <a class="shop-link" href="shop.html">Continue shopping <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="account-summary">
+          <article><span>Total spent</span><strong id="totalSpent">$0.00</strong></article>
+          <article><span>Completed orders</span><strong id="orderCount">0</strong></article>
+        </div>
+        <form id="profileForm" class="profile-form">
+          <h2>Profile details</h2>
+          <label><span>Full name</span><input id="profileName" name="name" minlength="2" maxlength="80" required /></label>
+          <label><span>Email</span><input id="profileEmail" name="email" type="email" readonly /></label>
+          <button class="primary-btn" type="submit">Save name</button>
+          <button id="logoutButton" class="secondary-btn" type="button">Sign out</button>
+        </form>
+        <section class="order-section" aria-labelledby="ordersHeading">
+          <h2 id="ordersHeading">Order history</h2>
+          <div id="orderList" class="order-list"></div>
+        </section>
+        <p class="privacy-note">For your privacy, PixelPlay displays only the payment brand and last four digits supplied by Stripe. Full card numbers and security codes are never saved here. No card is saved for future purchases.</p>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+node_modules/
+.env
+accounts.json
+accounts.json.tmp
+orders.json
+orders.json.tmp
+.DS_Store
+npm-debug.log*
